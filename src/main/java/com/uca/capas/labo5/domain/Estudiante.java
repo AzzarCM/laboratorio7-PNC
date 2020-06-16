@@ -37,6 +37,7 @@ public class Estudiante {
     
     @Min(value = 18, message = "No puede ser menor a 18 a;os")
     @NotNull(message = "Este campo no puede estar vacio")
+    @NotEmpty(message = "Este campo no puede estar vacio")
     @Column(name = "edad")
     private Integer Edad;
     @Column(name = "estado")

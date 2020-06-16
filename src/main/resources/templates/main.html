@@ -35,5 +35,9 @@
 	<form method="get" th:action="@{/insertarEstudiante}">
         <input type="submit" value="Insertar Nuevo Estudiante">
     </form>
+    <form method="post" th:action="@{/editarEstudiante}">
+        <label>Editar un estudiante por codigo: </label><input type="number" name="codigo"><br>
+        <input type="submit" value="Editar">
+    </form>
 </body>
 </html>

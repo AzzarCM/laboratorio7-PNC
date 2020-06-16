@@ -97,7 +97,41 @@ public class MainController {
     	mav.setViewName("agregarEstudiante");
     	return mav;
     }
-    
+
+    @RequestMapping(value = "/editarEstudiante", method = RequestMethod.POST)
+    public ModelAndView editar(@RequestParam(value="codigo") int id){
+        ModelAndView mav = new ModelAndView();
+        Estudiante estudianteEdit = new Estudiante();
+        try{
+            estudianteEdit = estudianteService.findOne(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        mav.setViewName("editar");
+        mav.addObject("estudiante", estudianteEdit);
+        return mav;
+    }
+    @PostMapping("/edit")
+    public ModelAndView listado(@Valid @ModelAttribute Estudiante estudiante, BindingResult result) {
+        ModelAndView mav = new ModelAndView();
+        List<Estudiante> estudiantes = null;
+        estudiantes = estudianteService.findAll();
+
+        if(!result.hasErrors()) {
+            mav.setViewName("main");
+            mav.addObject("estudiante", new Estudiante());
+            mav.addObject("estudiantes", estudiantes);
+            try {
+                estudianteService.save(estudiante);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            mav.setViewName("editar");
+        }
+        return mav;
+    }
 
     
 }

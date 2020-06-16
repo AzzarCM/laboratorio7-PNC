@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.uca.capas.labo5.repositories.EstudianteRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -15,25 +16,26 @@ import com.uca.capas.labo5.domain.Estudiante;
 public class EstudianteServiceImpl implements EstudianteService {
 	
 	@Autowired
-	EstudianteDAO estudianteDAO;
+	EstudianteRepo estudianteRepo;
+	//EstudianteDAO estudianteDAO;
 
 	@Override
 	public List<Estudiante> findAll() throws DataAccessException {
 		// TODO Auto-generated method stub
-		return estudianteDAO.findAll();
+		return estudianteRepo.findAll();
 	}
 
 	@Override
 	public Estudiante findOne(Integer code) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return estudianteDAO.findOne(code);
+		return estudianteRepo.getOne(code);
 	}
 
 	@Override
 	@Transactional
 	public void save(Estudiante estudiante) throws DataAccessException {
 		// TODO Auto-generated method stub
-		estudianteDAO.save(estudiante);
+		estudianteRepo.save(estudiante);
 		
 	}
 
@@ -41,7 +43,7 @@ public class EstudianteServiceImpl implements EstudianteService {
 	@Transactional
 	public void delete(Integer codigoEstudiante) throws DataAccessException {
 		// TODO Auto-generated method stub
-		estudianteDAO.delete(codigoEstudiante);
+		estudianteRepo.deleteById(codigoEstudiante);
 	}
 
 }
